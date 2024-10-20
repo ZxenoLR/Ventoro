@@ -1617,19 +1617,14 @@ function UILIB.newTab(name, img)
 			end)
 		end)
 	end
-
-
 	function self.newSlider(name, desc, min, max, manageSlider, func)
 		local newSlider = reserved.Slider:Clone()
-
 		newSlider.MouseEnter:Connect(function()
 			local twBtn = twServ:Create(newSlider, TweenInfo.new(0.2), { Transparency = 0 })
-
 			twBtn:Play()
 		end)
 		newSlider.MouseLeave:Connect(function()
 			local twBtn = twServ:Create(newSlider, TweenInfo.new(0.2), { Transparency = 0.4 })
-
 			twBtn:Play()
 		end)
 		newSlider.Visible = true
@@ -1637,26 +1632,23 @@ function UILIB.newTab(name, img)
 		newSlider.Parent = newTab
 		newSlider.Title.Text = name
 		newSlider.Description.Text = desc
-
 		local Mouse = game.Players.LocalPlayer:GetMouse()
 		local tweenServ = twServ
-
 		local Trigger = newSlider.ActualSlider.Trigger
 		local Label = newSlider.ActualSlider.Title
 		local Fill = newSlider.ActualSlider.Fill
 		local Parent = newSlider.ActualSlider
-
 		local perc
 		local Percent
 		local MouseDown = false
 		local delayTw = 0.3
-                Label.Text = min
+		Label.Text = min
 		local function Update()
 			MouseDown = true
 			repeat
 				task.wait()
 				Percent = math.clamp((Mouse.X - Parent.AbsolutePosition.X) / Parent.AbsoluteSize.X, 0, 1)
-				perc = math.round(Percent * max)
+				perc = math.round(min + Percent * (max - min)) 
 				if manageSlider == false then
 					Label.Text = perc
 					func(perc)
@@ -1668,17 +1660,13 @@ function UILIB.newTab(name, img)
 				tween:Play()
 			until MouseDown == false
 		end
-
 		Trigger.MouseButton1Down:Connect(Update)
-
 		UIS.InputEnded:Connect(function(input)
-			if input.UserInputType ==  Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 				MouseDown = false
 			end
 		end)
-
 	end
-	
 	function self.newToggle(title, desc, toggle, func)
 		local realToggle = toggle
 		local newToggle = reserved.Toggle:Clone()
