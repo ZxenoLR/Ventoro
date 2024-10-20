@@ -1619,7 +1619,7 @@ function UILIB.newTab(name, img)
 	end
 
 
-	function self.newSlider(name, desc, max, manageSlider, func)
+	function self.newSlider(name, desc, min, max, manageSlider, func)
 		local newSlider = reserved.Slider:Clone()
 
 		newSlider.MouseEnter:Connect(function()
@@ -1650,7 +1650,7 @@ function UILIB.newTab(name, img)
 		local Percent
 		local MouseDown = false
 		local delayTw = 0.3
-
+                Label.Text = min
 		local function Update()
 			MouseDown = true
 			repeat
