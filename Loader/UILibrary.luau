@@ -1643,6 +1643,7 @@ function UILIB.newTab(name, img)
 		local MouseDown = false
 		local delayTw = 0.3
 		Label.Text = min
+                Fill.Size = UDim2.fromScale(0, 1)
 		local function Update()
 			MouseDown = true
 			repeat
